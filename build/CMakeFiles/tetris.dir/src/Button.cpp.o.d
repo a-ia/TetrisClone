@@ -247,9 +247,4 @@ CMakeFiles/tetris.dir/src/Button.cpp.o: \
  /opt/sfml2/include/SFML/Graphics/Glsl.inl \
  /opt/sfml2/include/SFML/Graphics/Sprite.hpp \
  /opt/sfml2/include/SFML/Graphics/Text.hpp \
- /opt/sfml2/include/SFML/Graphics/VertexBuffer.hpp \
- /usr/include/c++/14.2.1/iomanip \
- /usr/include/c++/14.2.1/bits/quoted_string.h \
- /usr/include/c++/14.2.1/sstream /usr/include/c++/14.2.1/istream \
- /usr/include/c++/14.2.1/bits/istream.tcc \
- /usr/include/c++/14.2.1/bits/sstream.tcc
+ /opt/sfml2/include/SFML/Graphics/VertexBuffer.hpp
