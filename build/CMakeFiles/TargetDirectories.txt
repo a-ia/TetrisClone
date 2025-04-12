@@ -1,0 +1,3 @@
+/home/angel/Documents/TetrisClone/build/CMakeFiles/tetris.dir
+/home/angel/Documents/TetrisClone/build/CMakeFiles/edit_cache.dir
+/home/angel/Documents/TetrisClone/build/CMakeFiles/rebuild_cache.dir
