@@ -42,17 +42,17 @@ Game::Game()
         (window.getSize().x / 2.f) - (pausedText.getGlobalBounds().width / 2.f),
         window.getSize().y / 8.f
     );
-    
-    // Setup title text for main menu
 
     titleText.setFont(font);
-    titleText.setCharacterSize(50);
-    titleText.setString("Tetris by Sharon");
-    titleText.setPosition(
-        (window.getSize().x / 2.f) - (titleText.getGlobalBounds().width / 2.f),
-        window.getSize().y / 6.f
-    );
-    
+    titleText.setCharacterSize(60);
+    titleText.setString("Tetris by Sharon");  
+    titleText.setLetterSpacing(1.2f);
+
+    sf::FloatRect textBounds = titleText.getLocalBounds();
+    titleText.setOrigin(textBounds.left + textBounds.width / 2.f, 0.f);
+    titleText.setPosition(window.getSize().x / 2.f, 50.f);
+
+
     // Initialize menus
     initPauseMenu();
     initMainMenu();
@@ -455,7 +455,7 @@ void Game::resetGame() {
 
 void Game::initPauseMenu() {
     float buttonWidth = 200.f;
-    float buttonHeight = 40.f;
+    float buttonHeight = 45.f;
     float centerX = (window.getSize().x / 2.f) - (buttonWidth / 2.f);
     
     // Pause menu buttons
@@ -477,7 +477,7 @@ void Game::initPauseMenu() {
 
 void Game::initMainMenu() {
     float buttonWidth = 200.f;
-    float buttonHeight = 40.f;
+    float buttonHeight = 45.f;
     float centerX = (window.getSize().x / 2.f) - (buttonWidth / 2.f);
 
     mainMenuButtons.clear();
@@ -566,31 +566,40 @@ void Game::renderPauseMenu() {
 }
 
 void Game::renderMainMenu() {
-    // Background
     window.clear(sf::Color(230, 230, 230));
 
     std::string titleStr = "Tetris by Sharon";
-    
-    // Draw title with colorful letters
-    float charWidth = titleText.getGlobalBounds().width / titleStr.length();
-    float startX = (window.getSize().x / 2.f) - (titleText.getGlobalBounds().width / 2.f);
     float startY = window.getSize().y / 6.f;
-    
-    for (size_t i = 0; i < titleStr.length(); i++) {
+
+    float totalWidth = 0.f;
+    std::vector<float> advances;
+
+    // First pass: measure width of each character
+    for (char c : titleStr) {
+        const sf::Glyph& glyph = font.getGlyph(c, 50, false);
+        advances.push_back(glyph.advance);
+        totalWidth += glyph.advance;
+    }
+
+    // Calculate starting X to center the whole thing
+    float startX = (window.getSize().x / 2.f) - (totalWidth / 2.f);
+
+    float x = startX;
+    for (size_t i = 0; i < titleStr.size(); ++i) {
         sf::Text charText;
         charText.setFont(font);
         charText.setCharacterSize(50);
         charText.setString(titleStr[i]);
-        
-        // Use different colors from our tetris pieces for each letter
         charText.setFillColor(getPieceColor(i % 7));
-        
-        charText.setPosition(startX + i * charWidth, startY);
+        charText.setPosition(x, startY);
         window.draw(charText);
+
+        x += advances[i]; // move forward by actual character width
     }
-    
+
     // Draw buttons
     for (auto& button : mainMenuButtons) {
         button.render(window);
     }
 }
+
