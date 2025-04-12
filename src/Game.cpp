@@ -539,16 +539,6 @@ void Game::updateMainMenu() {
     }
 }
 
-//void Game::updateMainMenu() {
-//    sf::Vector2f mousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-    
-    // Update all buttons (hover states only)
-//    for (auto& button : mainMenuButtons) {
-//        button.update(mousePos);
-//    }
-    // No click handling here
-//}
-
 void Game::renderPauseMenu() {
     // Semi-transparent background
     sf::RectangleShape background;
